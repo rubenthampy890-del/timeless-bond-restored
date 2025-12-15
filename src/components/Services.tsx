@@ -7,7 +7,7 @@ const services = [
     number: "01",
   },
   {
-    title: "Luxury Destination Weddings",
+    title: "Destination Weddings",
     description: "From sun-kissed coastlines to historic European estates, we curate extraordinary destination celebrations in the world's most breathtaking settings.",
     number: "02",
   },

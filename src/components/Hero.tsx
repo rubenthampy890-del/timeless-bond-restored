@@ -17,7 +17,7 @@ const Hero = () => {
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <p className="text-primary font-body text-sm md:text-base tracking-luxury uppercase mb-6 animate-fade-up">
-            Luxury Wedding Experience
+            Wedding Experience Curators
           </p>
           
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-light text-primary-foreground leading-tight mb-8 animate-fade-up animation-delay-200">
@@ -26,7 +26,7 @@ const Hero = () => {
           </h1>
           
           <p className="font-body text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up animation-delay-400">
-            Luxury wedding experiences crafted with emotion, precision, and grace.
+            Wedding experiences crafted with emotion, precision, and grace.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 animate-fade-up animation-delay-600">
