@@ -47,16 +47,17 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
+        // Custom luxury colors
+        ivory: "hsl(var(--ivory))",
+        pearl: "hsl(var(--pearl))",
+        champagne: "hsl(var(--champagne))",
+        charcoal: "hsl(var(--charcoal))",
+        "warm-gray": "hsl(var(--warm-gray))",
+        "soft-black": "hsl(var(--soft-black))",
+      },
+      fontFamily: {
+        serif: ["Playfair Display", "serif"],
+        body: ["Cormorant", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,25 +66,31 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        shimmer: "shimmer 3s ease-in-out infinite",
+      },
+      letterSpacing: {
+        luxury: "0.25em",
+        wide: "0.15em",
+      },
+      transitionDuration: {
+        "400": "400ms",
+        "600": "600ms",
+        "800": "800ms",
       },
     },
   },
