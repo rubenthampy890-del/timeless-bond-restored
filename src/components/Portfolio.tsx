@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import wedding1 from "@/assets/wedding-1.jpg";
 import wedding2 from "@/assets/wedding-2.jpg";
 import wedding4 from "@/assets/wedding-4.jpg";
@@ -46,7 +47,41 @@ const portfolioItems = [
 ];
 
 const Portfolio = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const handlePrevious = useCallback(() => {
+    if (selectedIndex !== null) {
+      setSelectedIndex(selectedIndex === 0 ? portfolioItems.length - 1 : selectedIndex - 1);
+    }
+  }, [selectedIndex]);
+
+  const handleNext = useCallback(() => {
+    if (selectedIndex !== null) {
+      setSelectedIndex(selectedIndex === portfolioItems.length - 1 ? 0 : selectedIndex + 1);
+    }
+  }, [selectedIndex]);
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (selectedIndex === null) return;
+    if (e.key === "ArrowLeft") handlePrevious();
+    if (e.key === "ArrowRight") handleNext();
+    if (e.key === "Escape") setSelectedIndex(null);
+  }, [selectedIndex, handlePrevious, handleNext]);
+
+  useEffect(() => {
+    if (selectedIndex !== null) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedIndex, handleKeyDown]);
+
+  const selectedItem = selectedIndex !== null ? portfolioItems[selectedIndex] : null;
 
   return (
     <section id="portfolio" className="section-padding bg-background">
@@ -68,7 +103,7 @@ const Portfolio = () => {
               className={`group relative cursor-pointer overflow-hidden ${
                 index === 0 || index === 3 ? "lg:row-span-2" : ""
               }`}
-              onClick={() => setSelectedImage(item.image)}
+              onClick={() => setSelectedIndex(index)}
             >
               <div
                 className={`relative overflow-hidden ${
@@ -100,31 +135,68 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Lightbox */}
-      {selectedImage && (
+      {/* Elegant Lightbox */}
+      {selectedItem && (
         <div
-          className="fixed inset-0 z-50 bg-soft-black/95 flex items-center justify-center p-6 cursor-pointer"
-          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 z-50 bg-soft-black/98 backdrop-blur-sm flex items-center justify-center"
+          onClick={() => setSelectedIndex(null)}
         >
+          {/* Close Button */}
           <button
-            className="absolute top-8 right-8 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-            onClick={() => setSelectedImage(null)}
+            className="absolute top-6 right-6 md:top-10 md:right-10 z-10 w-12 h-12 flex items-center justify-center text-primary-foreground/60 hover:text-primary-foreground transition-all duration-300 hover:rotate-90"
+            onClick={() => setSelectedIndex(null)}
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M18 6L6 18M6 6L18 18"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
+            <X size={28} strokeWidth={1} />
           </button>
-          <img
-            src={selectedImage}
-            alt="Portfolio image"
-            className="max-w-full max-h-[85vh] object-contain"
+
+          {/* Navigation - Previous */}
+          <button
+            className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-10 w-14 h-14 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground border border-primary-foreground/20 hover:border-primary-foreground/50 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePrevious();
+            }}
+          >
+            <ChevronLeft size={24} strokeWidth={1} />
+          </button>
+
+          {/* Navigation - Next */}
+          <button
+            className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-10 w-14 h-14 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground border border-primary-foreground/20 hover:border-primary-foreground/50 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNext();
+            }}
+          >
+            <ChevronRight size={24} strokeWidth={1} />
+          </button>
+
+          {/* Image Container */}
+          <div 
+            className="relative max-w-[90vw] max-h-[80vh] animate-scale-in"
             onClick={(e) => e.stopPropagation()}
-          />
+          >
+            <img
+              src={selectedItem.image}
+              alt={selectedItem.location}
+              className="max-w-full max-h-[80vh] object-contain shadow-2xl"
+            />
+            
+            {/* Caption */}
+            <div className="absolute -bottom-16 left-0 right-0 text-center">
+              <p className="font-serif text-xl md:text-2xl text-primary-foreground/90 mb-1">
+                {selectedItem.location}
+              </p>
+              <p className="font-body text-sm text-primary-foreground/50 tracking-wider uppercase">
+                {selectedItem.atmosphere} · {selectedItem.year}
+              </p>
+            </div>
+          </div>
+
+          {/* Image Counter */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-body text-sm text-primary-foreground/40 tracking-widest">
+            {(selectedIndex ?? 0) + 1} / {portfolioItems.length}
+          </div>
         </div>
       )}
     </section>
