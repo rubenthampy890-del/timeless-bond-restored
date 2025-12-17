@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import wedding1 from "@/assets/wedding-1.jpg";
 import wedding2 from "@/assets/wedding-2.jpg";
 import wedding4 from "@/assets/wedding-4.jpg";
@@ -87,29 +88,31 @@ const Portfolio = () => {
     <section id="portfolio" className="section-padding bg-background">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-20">
+        <ScrollReveal animation="fade-up" className="text-center mb-12 md:mb-20">
           <p className="text-primary font-body text-sm tracking-luxury uppercase mb-4">
             Our Work
           </p>
           <h2 className="section-title">Moments We've Crafted</h2>
           <div className="luxury-divider" />
-        </div>
+        </ScrollReveal>
 
         {/* Masonry Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {portfolioItems.map((item, index) => (
-            <div
+            <ScrollReveal
               key={index}
+              animation="scale"
+              delay={index * 100}
               className={`group relative cursor-pointer overflow-hidden ${
                 index === 0 || index === 3 ? "lg:row-span-2" : ""
               }`}
-              onClick={() => setSelectedIndex(index)}
             >
               <div
+                onClick={() => setSelectedIndex(index)}
                 className={`relative overflow-hidden ${
                   index === 0 || index === 3
-                    ? "h-[400px] md:h-[500px] lg:h-full"
-                    : "h-[300px] md:h-[350px]"
+                    ? "h-[280px] sm:h-[350px] md:h-[450px] lg:h-full"
+                    : "h-[250px] sm:h-[280px] md:h-[350px]"
                 }`}
               >
                 <img
@@ -121,16 +124,16 @@ const Portfolio = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-soft-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 {/* Caption */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                  <p className="font-serif text-xl text-primary-foreground mb-1">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  <p className="font-serif text-lg sm:text-xl text-primary-foreground mb-1">
                     {item.location}
                   </p>
-                  <p className="font-body text-sm text-primary-foreground/70 tracking-wide">
+                  <p className="font-body text-xs sm:text-sm text-primary-foreground/70 tracking-wide">
                     {item.atmosphere} · {item.year}
                   </p>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -138,63 +141,63 @@ const Portfolio = () => {
       {/* Elegant Lightbox */}
       {selectedItem && (
         <div
-          className="fixed inset-0 z-50 bg-soft-black/98 backdrop-blur-sm flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-soft-black/98 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setSelectedIndex(null)}
         >
           {/* Close Button */}
           <button
-            className="absolute top-6 right-6 md:top-10 md:right-10 z-10 w-12 h-12 flex items-center justify-center text-primary-foreground/60 hover:text-primary-foreground transition-all duration-300 hover:rotate-90"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-10 md:right-10 z-10 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-primary-foreground/60 hover:text-primary-foreground transition-all duration-300 hover:rotate-90"
             onClick={() => setSelectedIndex(null)}
           >
-            <X size={28} strokeWidth={1} />
+            <X size={24} strokeWidth={1} className="sm:w-7 sm:h-7" />
           </button>
 
           {/* Navigation - Previous */}
           <button
-            className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-10 w-14 h-14 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground border border-primary-foreground/20 hover:border-primary-foreground/50 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+            className="absolute left-2 sm:left-4 md:left-10 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground border border-primary-foreground/20 hover:border-primary-foreground/50 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
             onClick={(e) => {
               e.stopPropagation();
               handlePrevious();
             }}
           >
-            <ChevronLeft size={24} strokeWidth={1} />
+            <ChevronLeft size={20} strokeWidth={1} className="sm:w-6 sm:h-6" />
           </button>
 
           {/* Navigation - Next */}
           <button
-            className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-10 w-14 h-14 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground border border-primary-foreground/20 hover:border-primary-foreground/50 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+            className="absolute right-2 sm:right-4 md:right-10 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground border border-primary-foreground/20 hover:border-primary-foreground/50 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
             onClick={(e) => {
               e.stopPropagation();
               handleNext();
             }}
           >
-            <ChevronRight size={24} strokeWidth={1} />
+            <ChevronRight size={20} strokeWidth={1} className="sm:w-6 sm:h-6" />
           </button>
 
           {/* Image Container */}
           <div 
-            className="relative max-w-[90vw] max-h-[80vh] animate-scale-in"
+            className="relative max-w-[90vw] max-h-[75vh] sm:max-h-[80vh] animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={selectedItem.image}
               alt={selectedItem.location}
-              className="max-w-full max-h-[80vh] object-contain shadow-2xl"
+              className="max-w-full max-h-[70vh] sm:max-h-[75vh] md:max-h-[80vh] object-contain shadow-2xl"
             />
             
             {/* Caption */}
-            <div className="absolute -bottom-16 left-0 right-0 text-center">
-              <p className="font-serif text-xl md:text-2xl text-primary-foreground/90 mb-1">
+            <div className="absolute -bottom-12 sm:-bottom-16 left-0 right-0 text-center">
+              <p className="font-serif text-lg sm:text-xl md:text-2xl text-primary-foreground/90 mb-1">
                 {selectedItem.location}
               </p>
-              <p className="font-body text-sm text-primary-foreground/50 tracking-wider uppercase">
+              <p className="font-body text-xs sm:text-sm text-primary-foreground/50 tracking-wider uppercase">
                 {selectedItem.atmosphere} · {selectedItem.year}
               </p>
             </div>
           </div>
 
           {/* Image Counter */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-body text-sm text-primary-foreground/40 tracking-widest">
+          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 font-body text-xs sm:text-sm text-primary-foreground/40 tracking-widest">
             {(selectedIndex ?? 0) + 1} / {portfolioItems.length}
           </div>
         </div>

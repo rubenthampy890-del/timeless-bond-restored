@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ScrollReveal } from "@/hooks/useScrollAnimation";
 
 const services = [
   {
@@ -35,81 +36,86 @@ const Services = () => {
     <section id="services" className="section-padding bg-secondary">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-20">
+        <ScrollReveal animation="fade-up" className="text-center mb-12 md:mb-20">
           <p className="text-primary font-body text-sm tracking-luxury uppercase mb-4">
             What We Offer
           </p>
           <h2 className="section-title">Our Signature Experiences</h2>
           <div className="luxury-divider" />
-        </div>
+        </ScrollReveal>
 
         {/* Services List */}
         <div className="space-y-0">
           {services.map((service, index) => (
-            <div
-              key={index}
-              className="group border-t border-border last:border-b py-10 md:py-14 cursor-pointer transition-all duration-500"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+            <ScrollReveal 
+              key={index} 
+              animation="fade-up" 
+              delay={index * 100}
             >
-              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
-                {/* Number */}
-                <span
-                  className={`font-body text-sm tracking-luxury transition-colors duration-500 ${
-                    hoveredIndex === index ? "text-primary" : "text-muted-foreground"
-                  }`}
-                >
-                  {service.number}
-                </span>
-
-                {/* Title */}
-                <h3
-                  className={`font-serif text-2xl md:text-3xl lg:text-4xl font-light transition-all duration-500 flex-1 ${
-                    hoveredIndex === index
-                      ? "text-primary translate-x-2"
-                      : "text-foreground"
-                  }`}
-                >
-                  {service.title}
-                </h3>
-
-                {/* Arrow */}
-                <div
-                  className={`hidden md:block transition-all duration-500 ${
-                    hoveredIndex === index
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 -translate-x-4"
-                  }`}
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="text-primary"
+              <div
+                className="group border-t border-border last:border-b py-8 md:py-12 lg:py-14 cursor-pointer transition-all duration-500"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 lg:gap-12">
+                  {/* Number */}
+                  <span
+                    className={`font-body text-xs md:text-sm tracking-luxury transition-colors duration-500 ${
+                      hoveredIndex === index ? "text-primary" : "text-muted-foreground"
+                    }`}
                   >
-                    <path
-                      d="M5 12H19M19 12L12 5M19 12L12 19"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                    {service.number}
+                  </span>
+
+                  {/* Title */}
+                  <h3
+                    className={`font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light transition-all duration-500 flex-1 ${
+                      hoveredIndex === index
+                        ? "text-primary md:translate-x-2"
+                        : "text-foreground"
+                    }`}
+                  >
+                    {service.title}
+                  </h3>
+
+                  {/* Arrow */}
+                  <div
+                    className={`hidden md:block transition-all duration-500 ${
+                      hoveredIndex === index
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 -translate-x-4"
+                    }`}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="text-primary"
+                    >
+                      <path
+                        d="M5 12H19M19 12L12 5M19 12L12 19"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Description - Revealed on hover (desktop) or always visible (mobile) */}
+                <div
+                  className={`overflow-hidden transition-all duration-500 md:transition-all ${
+                    hoveredIndex === index ? "md:max-h-32 md:mt-6 md:opacity-100" : "md:max-h-0 md:opacity-0"
+                  } max-h-32 mt-4 opacity-100 md:mt-0`}
+                >
+                  <p className="font-body text-sm md:text-base lg:text-lg text-muted-foreground max-w-3xl pl-0 md:pl-16">
+                    {service.description}
+                  </p>
                 </div>
               </div>
-
-              {/* Description - Revealed on hover */}
-              <div
-                className={`overflow-hidden transition-all duration-500 ${
-                  hoveredIndex === index ? "max-h-32 mt-6 opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
-                <p className="font-body text-lg text-muted-foreground max-w-3xl pl-0 md:pl-16">
-                  {service.description}
-                </p>
-              </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

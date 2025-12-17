@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ScrollReveal } from "@/hooks/useScrollAnimation";
 
 const testimonials = [
   {
@@ -30,60 +31,62 @@ const Testimonials = () => {
 
   return (
     <section id="testimonials" className="section-padding bg-background">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <ScrollReveal animation="fade-up" className="text-center mb-12 md:mb-16">
           <p className="text-primary font-body text-sm tracking-luxury uppercase mb-4">
             Kind Words
           </p>
           <h2 className="section-title">Words From Our Couples</h2>
           <div className="luxury-divider" />
-        </div>
+        </ScrollReveal>
 
         {/* Testimonial Carousel */}
-        <div className="relative min-h-[300px]">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-all duration-700 ${
-                index === currentIndex
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8 pointer-events-none"
-              }`}
-            >
-              <div className="text-center">
-                {/* Quote mark */}
-                <div className="text-primary/20 text-8xl font-serif leading-none mb-6">
-                  "
-                </div>
-                
-                <blockquote className="font-body text-xl md:text-2xl text-foreground leading-relaxed italic mb-10">
-                  {testimonial.quote}
-                </blockquote>
+        <ScrollReveal animation="fade-up" delay={200}>
+          <div className="relative min-h-[280px] sm:min-h-[300px]">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-all duration-700 ${
+                  index === currentIndex
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8 pointer-events-none"
+                }`}
+              >
+                <div className="text-center">
+                  {/* Quote mark */}
+                  <div className="text-primary/20 text-6xl sm:text-7xl md:text-8xl font-serif leading-none mb-4 sm:mb-6">
+                    "
+                  </div>
+                  
+                  <blockquote className="font-body text-lg sm:text-xl md:text-2xl text-foreground leading-relaxed italic mb-8 sm:mb-10 px-2">
+                    {testimonial.quote}
+                  </blockquote>
 
-                <div className="space-y-2">
-                  <p className="font-serif text-lg text-foreground">
-                    {testimonial.couple}
-                  </p>
-                  <p className="font-body text-sm text-muted-foreground tracking-wide">
-                    {testimonial.location}
-                  </p>
+                  <div className="space-y-1 sm:space-y-2">
+                    <p className="font-serif text-base sm:text-lg text-foreground">
+                      {testimonial.couple}
+                    </p>
+                    <p className="font-body text-xs sm:text-sm text-muted-foreground tracking-wide">
+                      {testimonial.location}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </ScrollReveal>
 
         {/* Dots Navigation */}
-        <div className="flex justify-center gap-3 mt-12">
+        <div className="flex justify-center gap-2 sm:gap-3 mt-10 sm:mt-12">
           {testimonials.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? "bg-primary w-8"
-                  : "bg-primary/30 hover:bg-primary/50"
+                  ? "bg-primary w-6 sm:w-8"
+                  : "bg-primary/30 hover:bg-primary/50 w-2"
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />
