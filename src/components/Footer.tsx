@@ -16,7 +16,9 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex gap-8 mb-12">
             <a
-              href="#"
+              href="https://www.instagram.com/timelessbond.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-primary-foreground/40 hover:text-primary transition-colors duration-300"
               aria-label="Instagram"
             >
@@ -27,17 +29,9 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="#"
-              className="text-primary-foreground/40 hover:text-primary transition-colors duration-300"
-              aria-label="Pinterest"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6C9 6 7 8.5 7 11c0 1.5.5 2.5 1.5 3-.5 2-1 4-1 5 2 0 3-2 3.5-3 .5.5 1 .5 1.5.5 3 0 5-2.5 5-5.5S15 6 12 6z" />
-              </svg>
-            </a>
-            <a
-              href="#"
+              href="https://www.facebook.com/infoanamorphicpicture"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-primary-foreground/40 hover:text-primary transition-colors duration-300"
               aria-label="Facebook"
             >
