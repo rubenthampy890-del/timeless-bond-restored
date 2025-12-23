@@ -1,14 +1,29 @@
+import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
+      {/* Parallax Background Image */}
+      <div 
+        className="absolute inset-0 will-change-transform"
+        style={{ transform: `translateY(${scrollY * 0.4}px)` }}
+      >
         <img
           src={heroBg}
           alt="Refined wedding experience"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-soft-black/70 via-soft-black/30 to-soft-black/20" />
       </div>
