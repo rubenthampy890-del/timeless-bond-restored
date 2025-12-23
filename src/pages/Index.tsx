@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import Sidebar from "@/components/Sidebar";
-import MobileNav from "@/components/MobileNav";
-import TopBar from "@/components/TopBar";
-import HeroCarousel from "@/components/HeroCarousel";
-import FilmsSection from "@/components/FilmsSection";
-import WorldMapSection from "@/components/WorldMapSection";
-import MusicSection from "@/components/MusicSection";
-import FeaturedSection from "@/components/FeaturedSection";
-import NewFooter from "@/components/NewFooter";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Philosophy from "@/components/Philosophy";
+import Services from "@/components/Services";
+import Portfolio from "@/components/Portfolio";
+import Team from "@/components/Team";
+import Testimonials from "@/components/Testimonials";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import ReloadIndicator, { ReloadButton } from "@/components/ReloadIndicator";
 
@@ -49,24 +49,15 @@ const Index = () => {
       )}
       <ReloadIndicator />
       <main className={`overflow-x-hidden transition-opacity duration-700 ${contentVisible ? "opacity-100" : "opacity-0"}`}>
-        {/* Desktop Sidebar */}
-        <Sidebar />
-        
-        {/* Mobile Navigation */}
-        <MobileNav />
-        
-        {/* Top Bar (Desktop Only) */}
-        <TopBar />
-        
-        {/* Main Content */}
-        <HeroCarousel />
-        <FilmsSection />
-        <WorldMapSection />
-        <MusicSection />
-        <FeaturedSection />
-        <NewFooter />
-        
-        {/* Reload Button */}
+        <Navbar />
+        <Hero />
+        <Philosophy />
+        <Services />
+        <Portfolio />
+        <Team />
+        <Testimonials />
+        <Contact />
+        <Footer />
         <ReloadButton />
       </main>
     </>
