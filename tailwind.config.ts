@@ -47,17 +47,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom luxury colors
+        // Custom cinematic colors
         ivory: "hsl(var(--ivory))",
         pearl: "hsl(var(--pearl))",
         champagne: "hsl(var(--champagne))",
         charcoal: "hsl(var(--charcoal))",
         "warm-gray": "hsl(var(--warm-gray))",
         "soft-black": "hsl(var(--soft-black))",
+        "cinema-black": "hsl(var(--cinema-black))",
       },
       fontFamily: {
-        serif: ["Playfair Display", "serif"],
-        body: ["Cormorant", "serif"],
+        serif: ["Cinzel", "serif"],
+        body: ["Cormorant Garamond", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -77,20 +78,52 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "fade-up-cinema": {
+          "0%": { opacity: "0", transform: "translateY(40px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in-cinema": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "scale-in-cinema": {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "slide-in-left": {
+          "0%": { opacity: "0", transform: "translateX(-60px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        "slide-in-right": {
+          "0%": { opacity: "0", transform: "translateX(60px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 3s ease-in-out infinite",
+        "fade-up-cinema": "fade-up-cinema 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "fade-in-cinema": "fade-in-cinema 1.5s ease-out forwards",
+        "scale-in-cinema": "scale-in-cinema 1s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "slide-in-left": "slide-in-left 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "slide-in-right": "slide-in-right 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
       },
       letterSpacing: {
-        luxury: "0.25em",
-        wide: "0.15em",
+        luxury: "0.3em",
+        wide: "0.2em",
+        cinema: "0.15em",
       },
       transitionDuration: {
         "400": "400ms",
         "600": "600ms",
         "800": "800ms",
+        "1000": "1000ms",
+        "1200": "1200ms",
+      },
+      transitionTimingFunction: {
+        "cinema": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "cinema-out": "cubic-bezier(0.76, 0, 0.24, 1)",
       },
     },
   },

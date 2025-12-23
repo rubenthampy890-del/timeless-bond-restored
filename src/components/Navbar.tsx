@@ -2,26 +2,26 @@ import { useState, useEffect, useCallback } from "react";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
+  { label: "Home", href: "#home" },
   { label: "Our Story", href: "#philosophy" },
+  { label: "Films", href: "#portfolio" },
   { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "The Team", href: "#team" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Team", href: "#team" },
   { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 80);
 
       // Detect active section
       const sections = navLinks.map(link => link.href.replace("#", ""));
-      const scrollPosition = window.scrollY + 150;
+      const scrollPosition = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const element = document.getElementById(sections[i]);
@@ -52,6 +52,11 @@ const Navbar = () => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
     
+    if (href === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    
     const targetId = href.replace("#", "");
     const targetElement = document.getElementById(targetId);
     
@@ -69,34 +74,30 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-cinema ${
           isScrolled
-            ? "py-2 md:py-3 shadow-[0_2px_20px_rgba(0,0,0,0.08)] backdrop-blur-md bg-background/95"
-            : "py-4 md:py-6 bg-transparent"
+            ? "py-3 bg-cinema-black/95 backdrop-blur-md border-b border-foreground/5"
+            : "py-5 md:py-6 bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           {/* Logo */}
           <a 
-            href="#" 
+            href="#home" 
             className="relative z-[60] group flex-shrink-0"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              setIsMobileMenuOpen(false);
-            }}
+            onClick={(e) => handleNavClick(e, "#home")}
           >
             <img
               src={logo}
               alt="Timeless Bond"
-              className={`transition-all duration-500 group-hover:opacity-80 ${
-                isScrolled ? "h-8 sm:h-10 md:h-12" : "h-10 sm:h-12 md:h-14"
-              } ${!isScrolled && !isMobileMenuOpen ? "brightness-0 invert" : ""}`}
+              className={`transition-all duration-700 ease-cinema group-hover:opacity-70 ${
+                isScrolled ? "h-9 md:h-10" : "h-10 md:h-12"
+              } brightness-0 invert`}
             />
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6 xl:space-x-10">
+          <div className="hidden lg:flex items-center space-x-10 xl:space-x-14">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
@@ -104,19 +105,15 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative text-[10px] xl:text-[11px] tracking-[0.18em] xl:tracking-[0.2em] uppercase font-body transition-all duration-300 pb-1 group whitespace-nowrap ${
-                    isScrolled
-                      ? isActive 
-                        ? "text-primary" 
-                        : "text-foreground/70 hover:text-foreground"
-                      : isActive
-                        ? "text-primary-foreground"
-                        : "text-primary-foreground/80 hover:text-primary-foreground"
+                  className={`relative text-[11px] tracking-[0.2em] uppercase font-body transition-all duration-500 pb-1 group ${
+                    isActive 
+                      ? "text-primary" 
+                      : "text-foreground/60 hover:text-foreground"
                   }`}
                 >
                   {link.label}
                   <span 
-                    className={`absolute bottom-0 left-0 h-px bg-current transition-all duration-300 ${
+                    className={`absolute -bottom-1 left-0 h-px bg-primary transition-all duration-500 ease-out ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`} 
                   />
@@ -125,54 +122,50 @@ const Navbar = () => {
             })}
           </div>
 
+          {/* Enquire Button - Desktop */}
+          <a
+            href="#contact"
+            onClick={(e) => handleNavClick(e, "#contact")}
+            className="hidden lg:inline-flex items-center gap-2 px-6 py-2.5 border border-foreground/20 text-foreground/80 font-body text-xs tracking-[0.2em] uppercase transition-all duration-500 hover:border-primary hover:text-primary"
+          >
+            Enquire
+          </a>
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden relative z-[60] w-10 h-10 sm:w-11 sm:h-11 flex flex-col justify-center items-center gap-[5px] sm:gap-[6px] rounded-full border transition-all duration-300 ${
-              isMobileMenuOpen
-                ? "border-foreground/20 bg-transparent"
-                : isScrolled
-                  ? "border-foreground/10 hover:border-foreground/30 bg-transparent"
-                  : "border-primary-foreground/20 hover:border-primary-foreground/40 bg-primary-foreground/5"
-            }`}
+            className="lg:hidden relative z-[60] w-12 h-12 flex flex-col justify-center items-center gap-1.5"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
             <span
-              className={`block h-[1px] transition-all duration-500 ease-out origin-center ${
+              className={`block h-px bg-foreground transition-all duration-500 ease-cinema origin-center ${
                 isMobileMenuOpen 
-                  ? "w-4 rotate-45 translate-y-[3px] bg-foreground" 
-                  : isScrolled
-                    ? "w-5 bg-foreground"
-                    : "w-5 bg-primary-foreground"
+                  ? "w-6 rotate-45 translate-y-1" 
+                  : "w-7"
               }`}
             />
             <span
-              className={`block h-[1px] transition-all duration-500 ease-out ${
+              className={`block h-px bg-foreground transition-all duration-500 ease-cinema ${
                 isMobileMenuOpen 
-                  ? "w-4 -rotate-45 -translate-y-[3px] bg-foreground" 
-                  : isScrolled
-                    ? "w-3.5 bg-foreground"
-                    : "w-3.5 bg-primary-foreground"
+                  ? "w-6 -rotate-45 -translate-y-1" 
+                  : "w-5"
               }`}
             />
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu - Full Screen Overlay */}
+      {/* Mobile Menu - Full Screen Overlay with cinematic feel */}
       <div
-        className={`lg:hidden fixed inset-0 bg-background z-[55] transition-all duration-500 ease-out ${
+        className={`lg:hidden fixed inset-0 bg-cinema-black z-[55] transition-all duration-700 ease-cinema ${
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
-        style={{
-          visibility: isMobileMenuOpen ? 'visible' : 'hidden',
-        }}
       >
         <div className="flex flex-col items-center justify-center h-full px-6">
-          <nav className="flex flex-col items-center gap-6 sm:gap-7">
+          <nav className="flex flex-col items-center gap-8">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
@@ -180,38 +173,47 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`text-xl sm:text-2xl md:text-3xl font-serif tracking-wide transition-all duration-500 relative group ${
-                    isActive ? "text-primary" : "text-foreground/70 hover:text-foreground"
+                  className={`text-2xl sm:text-3xl font-serif tracking-wide transition-all duration-700 ease-cinema ${
+                    isActive ? "text-primary" : "text-foreground/60 hover:text-foreground"
                   } ${
                     isMobileMenuOpen 
                       ? "translate-y-0 opacity-100" 
-                      : "translate-y-6 opacity-0"
+                      : "translate-y-10 opacity-0"
                   }`}
                   style={{ 
-                    transitionDelay: isMobileMenuOpen ? `${100 + index * 50}ms` : "0ms" 
+                    transitionDelay: isMobileMenuOpen ? `${200 + index * 80}ms` : "0ms" 
                   }}
                 >
                   {link.label}
-                  <span 
-                    className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-px bg-primary transition-all duration-300 ${
-                      isActive ? "w-8" : "w-0 group-hover:w-8"
-                    }`}
-                  />
                 </a>
               );
             })}
           </nav>
           
-          {/* Mobile menu footer */}
-          <div 
-            className={`absolute bottom-10 sm:bottom-12 text-center transition-all duration-500 ${
+          {/* Mobile Enquire Button */}
+          <a
+            href="#contact"
+            onClick={(e) => handleNavClick(e, "#contact")}
+            className={`mt-12 px-10 py-4 border border-foreground/20 text-foreground/80 font-body text-sm tracking-[0.2em] uppercase transition-all duration-700 ease-cinema hover:border-primary hover:text-primary ${
               isMobileMenuOpen 
                 ? "translate-y-0 opacity-100" 
-                : "translate-y-4 opacity-0"
+                : "translate-y-10 opacity-0"
             }`}
-            style={{ transitionDelay: isMobileMenuOpen ? "450ms" : "0ms" }}
+            style={{ transitionDelay: isMobileMenuOpen ? "600ms" : "0ms" }}
           >
-            <p className="font-body text-[10px] sm:text-xs tracking-[0.25em] uppercase text-muted-foreground">
+            Enquire
+          </a>
+          
+          {/* Mobile menu footer */}
+          <div 
+            className={`absolute bottom-12 text-center transition-all duration-700 ease-cinema ${
+              isMobileMenuOpen 
+                ? "translate-y-0 opacity-100" 
+                : "translate-y-6 opacity-0"
+            }`}
+            style={{ transitionDelay: isMobileMenuOpen ? "700ms" : "0ms" }}
+          >
+            <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground">
               Est. 2025
             </p>
           </div>

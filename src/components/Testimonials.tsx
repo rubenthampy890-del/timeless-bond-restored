@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ScrollReveal } from "@/hooks/useScrollAnimation";
+import { ScrollReveal, LineReveal } from "@/hooks/useScrollAnimation";
 
 const testimonials = [
   {
@@ -25,49 +25,60 @@ const Testimonials = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    }, 8000);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <section id="testimonials" className="section-padding bg-background">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section id="testimonials" className="section-padding bg-background relative overflow-hidden">
+      {/* Subtle background accent */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-3xl" />
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
-        <ScrollReveal animation="fade-up" className="text-center mb-12 md:mb-16">
-          <p className="text-primary font-body text-sm tracking-luxury uppercase mb-4">
-            Kind Words
-          </p>
-          <h2 className="section-title">Words From Our Couples</h2>
-          <div className="luxury-divider" />
-        </ScrollReveal>
+        <div className="text-center mb-16">
+          <ScrollReveal animation="fade-up">
+            <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-6">
+              Kind Words
+            </p>
+          </ScrollReveal>
+          
+          <ScrollReveal animation="fade-up" delay={100}>
+            <h2 className="section-title">From Our Couples</h2>
+          </ScrollReveal>
+          
+          <LineReveal className="w-20 mx-auto my-10" delay={300} />
+        </div>
 
         {/* Testimonial Carousel */}
         <ScrollReveal animation="fade-up" delay={200}>
-          <div className="relative min-h-[280px] sm:min-h-[300px]">
+          <div className="relative min-h-[350px]">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className={`absolute inset-0 transition-all duration-700 ${
+                className={`absolute inset-0 transition-all duration-1000 ease-cinema ${
                   index === currentIndex
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8 pointer-events-none"
+                    : "opacity-0 translate-y-12 pointer-events-none"
                 }`}
               >
                 <div className="text-center">
-                  {/* Quote mark */}
-                  <div className="text-primary/20 text-6xl sm:text-7xl md:text-8xl font-serif leading-none mb-4 sm:mb-6">
+                  {/* Large quote mark */}
+                  <div className="text-primary/15 text-[120px] md:text-[150px] font-serif leading-none mb-0 -mt-8">
                     "
                   </div>
                   
-                  <blockquote className="font-body text-lg sm:text-xl md:text-2xl text-foreground leading-relaxed italic mb-8 sm:mb-10 px-2">
+                  <blockquote className="font-body text-xl sm:text-2xl md:text-3xl text-foreground/90 leading-relaxed italic -mt-16 mb-12 px-4">
                     {testimonial.quote}
                   </blockquote>
 
-                  <div className="space-y-1 sm:space-y-2">
-                    <p className="font-serif text-base sm:text-lg text-foreground">
+                  <div className="space-y-2">
+                    <p className="font-serif text-xl text-foreground">
                       {testimonial.couple}
                     </p>
-                    <p className="font-body text-xs sm:text-sm text-muted-foreground tracking-wide">
+                    <p className="font-body text-sm text-muted-foreground tracking-[0.2em] uppercase">
                       {testimonial.location}
                     </p>
                   </div>
@@ -77,16 +88,16 @@ const Testimonials = () => {
           </div>
         </ScrollReveal>
 
-        {/* Dots Navigation */}
-        <div className="flex justify-center gap-2 sm:gap-3 mt-10 sm:mt-12">
+        {/* Navigation Dots */}
+        <div className="flex justify-center gap-4 mt-12">
           {testimonials.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
+              className={`relative h-2 transition-all duration-700 ${
                 index === currentIndex
-                  ? "bg-primary w-6 sm:w-8"
-                  : "bg-primary/30 hover:bg-primary/50 w-2"
+                  ? "w-10 bg-primary"
+                  : "w-2 bg-foreground/20 hover:bg-foreground/40"
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />
