@@ -48,12 +48,17 @@ const Index = () => {
         />
       )}
       <ReloadIndicator />
-      <main className={`overflow-x-hidden transition-opacity duration-700 ${contentVisible ? "opacity-100" : "opacity-0"}`}>
+      <main 
+        id="home"
+        className={`overflow-x-hidden transition-opacity duration-1000 ease-cinema ${
+          contentVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <Navbar />
         <Hero />
         <Philosophy />
-        <Services />
         <Portfolio />
+        <Services />
         <Team />
         <Testimonials />
         <Contact />

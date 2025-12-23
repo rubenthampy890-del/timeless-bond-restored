@@ -1,56 +1,96 @@
 import { Link } from "react-router-dom";
-import { ScrollReveal } from "@/hooks/useScrollAnimation";
-import { ArrowRight } from "lucide-react";
+import { ScrollReveal, LineReveal } from "@/hooks/useScrollAnimation";
 
 const Contact = () => {
   return (
-    <section id="contact" className="section-padding bg-soft-black text-primary-foreground">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section id="contact" className="section-padding bg-cinema-black text-foreground relative overflow-hidden">
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="absolute bottom-1/3 right-0 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
+      </div>
+
+      <div className="max-w-3xl mx-auto relative z-10">
         {/* Header */}
-        <ScrollReveal animation="fade-up" className="text-center">
-          <p className="text-primary font-body text-sm tracking-luxury uppercase mb-4">
-            Begin Your Journey
-          </p>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-primary-foreground mb-6">
-            How to Book Your Special Day
-          </h2>
-          <div className="w-12 sm:w-16 h-px bg-primary mx-auto my-6 sm:my-8" />
-          <p className="font-body text-base sm:text-lg text-primary-foreground/70 max-w-xl mx-auto mb-10">
-            Every extraordinary celebration begins with a conversation. Schedule your private consultation and let us understand your vision, preferences, and dreams.
-          </p>
+        <div className="text-center">
+          <ScrollReveal animation="fade-up">
+            <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-6">
+              Begin Your Journey
+            </p>
+          </ScrollReveal>
           
-          {/* CTA Button */}
-          <Link
-            to="/book"
-            className="group inline-flex items-center gap-3 px-10 sm:px-14 py-4 sm:py-5 bg-primary text-primary-foreground font-body text-sm tracking-luxury uppercase transition-all duration-500 hover:bg-primary/90 hover:gap-5"
-          >
-            Schedule Your Consultation
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
-        </ScrollReveal>
+          <ScrollReveal animation="fade-up" delay={100}>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-wide text-foreground mb-8">
+              Let's Tell Your Story
+            </h2>
+          </ScrollReveal>
+          
+          <LineReveal className="w-20 mx-auto my-10" delay={300} />
+          
+          <ScrollReveal animation="fade-up" delay={400}>
+            <p className="font-body text-lg md:text-xl text-foreground/60 max-w-xl mx-auto mb-12 leading-relaxed">
+              Every extraordinary celebration begins with a conversation. Schedule your private consultation and let us understand your vision, preferences, and dreams.
+            </p>
+          </ScrollReveal>
+          
+          {/* CTA Button - Cinematic style */}
+          <ScrollReveal animation="fade-up" delay={500}>
+            <Link
+              to="/book"
+              className="group inline-flex items-center gap-4 px-12 py-5 border border-foreground/20 text-foreground font-body text-sm tracking-[0.3em] uppercase transition-all duration-700 hover:border-primary hover:bg-primary/10"
+            >
+              Schedule Consultation
+              <svg 
+                className="w-5 h-5 transition-transform duration-700 group-hover:translate-x-2" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="1"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </ScrollReveal>
+        </div>
 
         {/* Contact Details */}
-        <ScrollReveal animation="fade-up" delay={400}>
-          <div className="mt-16 md:mt-20 pt-10 md:pt-12 border-t border-primary-foreground/10 flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 md:gap-16">
-            <div className="text-center">
-              <p className="font-body text-[10px] sm:text-xs tracking-luxury uppercase text-primary-foreground/40 mb-2">
-                Email
-              </p>
-              <a
-                href="mailto:hello@timelessbond.com"
-                className="font-body text-base sm:text-lg text-primary-foreground/80 hover:text-primary transition-colors duration-300"
-              >
-                hello@timelessbond.com
-              </a>
-            </div>
-            <div className="hidden sm:block w-px h-10 bg-primary-foreground/20" />
-            <div className="text-center">
-              <p className="font-body text-[10px] sm:text-xs tracking-luxury uppercase text-primary-foreground/40 mb-2">
-                By Appointment
-              </p>
-              <p className="font-body text-base sm:text-lg text-primary-foreground/80">
-                Mumbai · Bangalore · Delhi
-              </p>
+        <ScrollReveal animation="fade-up" delay={600}>
+          <div className="mt-24 pt-12 border-t border-foreground/10">
+            <div className="grid md:grid-cols-3 gap-10 text-center">
+              <div>
+                <p className="font-body text-xs tracking-[0.3em] uppercase text-foreground/40 mb-3">
+                  Email
+                </p>
+                <a
+                  href="mailto:hello@timelessbond.com"
+                  className="font-body text-lg text-foreground/80 hover:text-primary transition-colors duration-500"
+                >
+                  hello@timelessbond.com
+                </a>
+              </div>
+              
+              <div>
+                <p className="font-body text-xs tracking-[0.3em] uppercase text-foreground/40 mb-3">
+                  By Appointment
+                </p>
+                <p className="font-body text-lg text-foreground/80">
+                  Mumbai · Delhi · Bangalore
+                </p>
+              </div>
+              
+              <div>
+                <p className="font-body text-xs tracking-[0.3em] uppercase text-foreground/40 mb-3">
+                  Follow
+                </p>
+                <a
+                  href="https://www.instagram.com/timelessbond.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body text-lg text-foreground/80 hover:text-primary transition-colors duration-500"
+                >
+                  @timelessbond.in
+                </a>
+              </div>
             </div>
           </div>
         </ScrollReveal>
