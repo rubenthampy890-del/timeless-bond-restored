@@ -7,79 +7,75 @@
 @layer base {
   :root {
     /* Cinematic Wedding Palette - Dark & Moody */
-    --background: 0 0% 6%;
-    --foreground: 45 20% 95%;
+    /* Masterpiece Cinematic Colors */
+    --background: 0 0% 3.9%;
+    /* Void #0a0a0a */
+    --foreground: 38 24% 94%;
+    /* Silk #f4f1ea */
 
-    --card: 0 0% 8%;
-    --card-foreground: 45 20% 95%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 38 24% 94%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 45 20% 95%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 38 24% 94%;
 
-    /* Champagne Gold - More refined */
-    --primary: 38 45% 55%;
-    --primary-foreground: 45 20% 95%;
+    --primary: 46 64% 52%;
+    /* Bronze #d4af37 */
+    --primary-foreground: 0 0% 3.9%;
 
-    /* Deep charcoal */
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 45 20% 95%;
+    --secondary: 0 0% 7%;
+    /* Charcoal #121212 */
+    --secondary-foreground: 38 24% 94%;
 
-    /* Muted tones */
-    --muted: 0 0% 18%;
-    --muted-foreground: 45 10% 65%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
-    /* Accent gold */
-    --accent: 38 45% 55%;
-    --accent-foreground: 45 20% 95%;
+    --accent: 46 64% 52%;
+    --accent-foreground: 0 0% 3.9%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 45 20% 95%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 38 24% 94%;
 
-    /* Subtle borders */
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 38 45% 55%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 46 64% 52%;
 
-    --radius: 0px;
+    --radius: 0.5rem;
 
-    /* Custom luxury tokens */
-    --ivory: 45 20% 95%;
-    --pearl: 45 15% 90%;
-    --champagne: 38 45% 55%;
-    --charcoal: 0 0% 6%;
-    --warm-gray: 30 5% 50%;
-    --soft-black: 0 0% 4%;
-    --cinema-black: 0 0% 3%;
+    /* Custom Tokens */
+    --void: 0 0% 3.9%;
+    --silk: 38 24% 94%;
+    --bronze: 46 64% 52%;
   }
 
   .dark {
-    --background: 0 0% 4%;
-    --foreground: 45 20% 95%;
+    --background: 0 0% 3.9%;
+    --foreground: 38 24% 94%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 45 20% 95%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 38 24% 94%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 45 20% 95%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 38 24% 94%;
 
-    --primary: 38 45% 55%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 46 64% 52%;
+    --primary-foreground: 0 0% 3.9%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 45 20% 95%;
+    --secondary: 0 0% 7%;
+    --secondary-foreground: 38 24% 94%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 45 10% 60%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 38 45% 55%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 46 64% 52%;
+    --accent-foreground: 0 0% 3.9%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 45 20% 95%;
+    --destructive-foreground: 38 24% 94%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 38 45% 55%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 46 64% 52%;
   }
 }
 
@@ -98,7 +94,12 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif;
   }
 
@@ -133,6 +134,7 @@
 }
 
 @layer utilities {
+
   /* Cinematic slow fade animations */
   .animate-fade-up {
     animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -206,6 +208,7 @@
       opacity: 0;
       transform: translateY(60px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -216,6 +219,7 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -226,6 +230,7 @@
       opacity: 0;
       transform: translateY(100%);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -236,15 +241,19 @@
     from {
       transform: scaleX(0);
     }
+
     to {
       transform: scaleX(1);
     }
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-15px);
     }
@@ -261,6 +270,7 @@
       transform: scale(0.9);
       filter: blur(10px);
     }
+
     100% {
       opacity: 1;
       transform: scale(1);
@@ -273,6 +283,7 @@
       opacity: 1;
       transform: scale(1);
     }
+
     100% {
       opacity: 0;
       transform: scale(1.05);
@@ -280,9 +291,12 @@
   }
 
   @keyframes cinematicPulse {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 0.4;
     }
+
     50% {
       opacity: 1;
     }
@@ -292,9 +306,11 @@
     0% {
       width: 0%;
     }
+
     50% {
       width: 100%;
     }
+
     100% {
       width: 0%;
       margin-left: 100%;
@@ -305,6 +321,7 @@
     0% {
       transform: scaleY(1);
     }
+
     100% {
       transform: scaleY(0);
     }
@@ -398,10 +415,13 @@
   }
 
   @keyframes scrollCinema {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 0.4;
       transform: translateY(0);
     }
+
     50% {
       opacity: 1;
       transform: translateY(15px);
